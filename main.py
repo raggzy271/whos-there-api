@@ -7,6 +7,10 @@ import os
 
 app = FastAPI()
 
+@app.get('/test')
+def test():
+    return {"message": "Hi! This is up and running!"}
+
 @app.post('/identify-gender')
 async def identifyGender(audio: UploadFile):
     # save the audio file
