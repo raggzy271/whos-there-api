@@ -13,6 +13,9 @@ def test():
 
 @app.post('/identify-gender')
 async def identifyGender(audio: UploadFile):
+    if len(audio.filename) == 0:
+        return {"message": "Please upload a valid audio file."}
+
     # save the audio file
     with open(audio.filename, 'wb') as f:
         f.write(audio.file.read())
