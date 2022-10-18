@@ -9,16 +9,16 @@ app = FastAPI()
 
 @app.get('/test')
 def test():
-    return {"message": "Hi! This is up and running!"}
+    return {"message": "Hi! This is up and running!", "gender":"not-applicable"}
 
 @app.post('/post-test')
 async def post_test(test: str):
-    return {"message": "Hi! This is post request!", "received": test}
+    return {"message": "Hi! This is post request! We received " + test, "gender": "not-applicable"}
 
 @app.post('/identify-gender')
 async def identifyGender(audio: UploadFile):
     if len(audio.filename) == 0:
-        return {"message": "Please upload a valid audio file."}
+        return {"message": "Please upload a valid audio file.", "gender":"not-applicable"}
 
     # save the audio file
     with open(audio.filename, 'wb') as f:
@@ -36,7 +36,8 @@ async def identifyGender(audio: UploadFile):
         model = pickle.load(f)
         predictions = model.predict(features)
     prediction = st.mode(predictions)    
-    return prediction
+    return {"gender":prediction, "message": "Success"}
+
 
 def noise(data):
     noise_amp = 0.035*np.random.uniform()*np.amax(data)
