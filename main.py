@@ -11,6 +11,10 @@ app = FastAPI()
 def test():
     return {"message": "Hi! This is up and running!"}
 
+@app.post('/post-test')
+async def post_test(test: str):
+    return {"message": "Hi! This is post request!", "received": test}
+
 @app.post('/identify-gender')
 async def identifyGender(audio: UploadFile):
     if len(audio.filename) == 0:
