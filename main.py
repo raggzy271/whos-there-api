@@ -3,13 +3,12 @@ from predictor import predict
 import os
 
 app = FastAPI()
-voice_url = '/identify-voice'
 
 @app.get('/')
 def index():
-    return {"message": f"Hi, this is an API that identifies voices. You might want to send a POST request to {voice_url} to see us in action."}
+    return {"message": f"Hi, this is an API that identifies voices. You might want to send a POST request to /identify-voice to see us in action."}
 
-@app.post(voice_url)
+@app.post('/identify-voice')
 async def identify_voice(audio: UploadFile):
     path_3gp = audio.filename
     if len(path_3gp) == 0:
