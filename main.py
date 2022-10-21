@@ -14,7 +14,6 @@ def identify_voice(audio: UploadFile):
     x = True
     if x:
         return { "success": True, "message": audio.file.name, "prediction": "" }
-    else:
         # path_3gp = audio.filename
         # if len(path_3gp) == 0:
         #     return { "success": False, "message": "Please upload a valid audio file.", "prediction": "" }
