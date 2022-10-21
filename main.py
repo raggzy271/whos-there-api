@@ -12,7 +12,7 @@ def index():
 @app.post(voice_url)
 async def identify_voice(audio: UploadFile):
     if len(audio.filename) == 0:
-        return { "success": False, "message": "Please upload a valid audio file.", "prediction": None }
+        return { "success": False, "message": "Please upload a valid audio file.", "prediction": "" }
 
     # save the audio file
     with open(audio.filename, 'wb') as f:
