@@ -9,8 +9,12 @@ voice_url = '/identify-voice'
 def index():
     return {"message": f"Hi, this is an API that identifies voices. You might want to send a POST request to {voice_url} to see us in action."}
 
+@app.post('/test-file')
+def test_file(file: UploadFile):
+    return {"success": True, "message": f"Received file {file.filename} of content type {file.content_type}.", "prediction": ""}
+
 @app.post(voice_url)
-async def identify_voice(audio: UploadFile):
+def identify_voice(audio: UploadFile):
     if len(audio.filename) == 0:
         return { "success": False, "message": "Please upload a valid audio file.", "prediction": "" }
 
