@@ -11,17 +11,13 @@ def index():
 
 @app.post('/test-file')
 async def test_file(file: UploadFile):
-    return { "success": True, "message": file.filename, "prediction": "" }
-
-@app.post(voice_url)
-def identify_voice(audio: UploadFile):
-    path_3gp = audio.filename
+    path_3gp = file.filename
     if len(path_3gp) == 0:
         return { "success": False, "message": "Please upload a valid audio file.", "prediction": "" }
 
     # save the audio file
     with open(path_3gp, 'wb') as f:
-        f.write(audio.file.read())
+        f.write(file.file.read())
 
     # convert 3gp to wav file
     path_wav = path_3gp.replace('.3gp', '.wav')
