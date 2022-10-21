@@ -3,7 +3,12 @@ import numpy as np
 import pickle
 import statistics as st
 from fastapi import FastAPI, UploadFile
+from pydantic import BaseModel
 import os
+
+class DataModal(BaseModel):
+    name: str
+    job: str
 
 app = FastAPI()
 
@@ -12,8 +17,8 @@ def test():
     return {"message": "Hi! This is up and running!", "gender":"not-applicable"}
 
 @app.post('/post-test')
-async def post_test(test: str):
-    return {"message": "Hi! This is post request! We received " + test, "gender": "not-applicable"}
+async def post_test(data: DataModal):
+    return data
 
 @app.post('/identify-gender')
 async def identifyGender(audio: UploadFile):
