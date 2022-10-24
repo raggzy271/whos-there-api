@@ -1,8 +1,7 @@
-from random import random
 from fastapi import FastAPI, UploadFile
 from fastapi.responses import FileResponse
 from predictor import predict
-import os
+import os, random
 
 app = FastAPI()
 
@@ -33,7 +32,7 @@ async def identify_voice(audio: UploadFile):
 
     return { "success": True, "message": "Prediction successful", "prediction": prediction }
 
-@app.get('/images/{gender}')
+@app.get('/get-image/{gender}')
 def get_image(gender: str):
     images = os.listdir(f'images/{gender}')
     image = random.choice(images)
