@@ -32,8 +32,9 @@ async def identify_voice(audio: UploadFile):
 
     return { "success": True, "message": "Prediction successful", "prediction": prediction }
 
-@app.get('/get-image/{gender}')
+@app.get('/images/{gender}')
 def get_image(gender: str):
-    images = os.listdir(f'images/{gender}')
+    directory = f'images/{gender}'
+    images = os.listdir(directory)
     image = random.choice(images)
-    return FileResponse(image)
+    return FileResponse(directory + '/' + image)
